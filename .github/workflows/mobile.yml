@@ -95,6 +95,8 @@ jobs:
 
   ios:
     name: iOS (unsigned IPA)
+    # Dependabot PRs skip the scarce macOS runners; Linux/Windows jobs still check them.
+    if: github.actor != 'dependabot[bot]'
     runs-on: macos-latest
     defaults:
       run:
