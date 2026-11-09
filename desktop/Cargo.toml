@@ -41,7 +41,7 @@ gethostname = "0.5.0"
 # "highsierra" enables CGEvent::new_scroll_event (pixel scrolling)
 core-graphics = { version = "0.23.2", features = ["highsierra"] }
 core-foundation = "0.9.4"
-rfd = "0.14.1"
+rfd = "0.17.2"
 # [NSApp activateIgnoringOtherApps:] before the pairing alert (menu-bar apps are never
 # frontmost, so the NSAlert would otherwise open behind other windows). Already in the
 # dependency tree through rfd / tao.
