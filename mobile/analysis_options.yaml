@@ -1,0 +1,17 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "build/**"
+    - "android/**"
+    - "ios/**"
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    avoid_print: true
+    # Const-ness is a micro-optimisation; keep CI from failing on it.
+    prefer_const_constructors: false
+    prefer_const_constructors_in_immutables: false
+    prefer_const_declarations: false
+    prefer_const_literals_to_create_immutables: false

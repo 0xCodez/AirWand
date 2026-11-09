@@ -1,0 +1,66 @@
+name: Feature request
+description: Suggest an idea or an improvement for Orbit.
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [docs/ROADMAP.md](../blob/main/docs/ROADMAP.md) first: your idea may already be planned.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Trackpad and gestures
+        - Air pointer
+        - Keys / text input
+        - Media / presenter
+        - Switching between computers
+        - Discovery and pairing
+        - Settings
+        - Desktop agent
+        - New platform
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the situation, not the solution yet.
+      placeholder: "When I give a presentation I want to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How should it work? Sketches and references to other apps are welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+
+  - type: dropdown
+    id: protocol
+    attributes:
+      label: Does this need a protocol change?
+      description: New message types or fields must go into docs/PROTOCOL.md and be implemented on both sides.
+      options:
+        - "No"
+        - "Yes"
+        - Not sure
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to work on this myself.

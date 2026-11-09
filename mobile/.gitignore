@@ -1,0 +1,55 @@
+# Generated platform folders are NOT committed in v1.
+# Recreate them with:  bash tool/bootstrap.sh   (or  pwsh tool/bootstrap.ps1)
+/android/
+/ios/
+/macos/
+/windows/
+/linux/
+/web/
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code (keep shared settings if you add them deliberately)
+.vscode/
+
+# Flutter / Dart / Pub
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+/coverage/
+.metadata
+
+# Symbolication / obfuscation
+app.*.symbols
+app.*.map.json
+
+# Signing material must never be committed
+*.jks
+*.keystore
+key.properties
+*.p12
+*.mobileprovision

@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------
+# Orbit root .gitignore
+# Platform-specific Flutter ignores live in mobile/.gitignore.
+# ---------------------------------------------------------------
+
+# OS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+
+# Editors / IDEs
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+*~
+.history/
+.fleet/
+.zed/
+
+# Logs, env, scratch
+*.log
+.env
+.env.*
+!.env.example
+node_modules/
+coverage/
+
+# Desktop agent (Rust). Cargo.lock IS committed: orbit-desktop is a binary.
+desktop/target/
+desktop/dist/
+**/*.rs.bk
+
+# Mobile app (Flutter). See mobile/.gitignore for the rest.
+mobile/build/
+mobile/.dart_tool/
+
+# Release packaging leftovers
+*.ipa
+Payload/

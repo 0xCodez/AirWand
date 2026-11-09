@@ -1,0 +1,120 @@
+name: Bug report
+description: Something in Orbit does not work as expected.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+        **Security issues:** please do not file them here. Follow [SECURITY.md](../blob/main/SECURITY.md) instead.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Where does it happen?
+      options:
+        - Phone app
+        - Desktop agent
+        - Pairing
+        - Discovery (computer not found)
+        - Connection / latency
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phone
+    attributes:
+      label: Phone platform
+      options:
+        - iPhone (iOS)
+        - Android
+        - Solana Seeker
+        - Solana Saga
+        - Not relevant
+    validations:
+      required: true
+
+  - type: input
+    id: phone-model
+    attributes:
+      label: Phone model and OS version
+      placeholder: "iPhone 15 Pro, iOS 26.1 / Pixel 9, Android 16"
+
+  - type: dropdown
+    id: host
+    attributes:
+      label: Computer OS
+      options:
+        - macOS (Apple silicon)
+        - macOS (Intel)
+        - Windows 11
+        - Windows 10
+        - Not relevant
+    validations:
+      required: true
+
+  - type: input
+    id: host-version
+    attributes:
+      label: Computer OS version
+      placeholder: "macOS 26.1 / Windows 11 24H2"
+
+  - type: input
+    id: orbit-version
+    attributes:
+      label: Orbit version
+      description: Release tag or commit SHA of the app and the agent.
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: network
+    attributes:
+      label: Network
+      options:
+        - Home Wi-Fi
+        - Office / enterprise Wi-Fi
+        - Phone hotspot
+        - Guest network / client isolation
+        - Other
+        - Not sure
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Orbit on the phone
+        2. Pair with "My MacBook"
+        3. Two-finger scroll in Safari
+        4. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Desktop agent output (run `orbit` from a terminal) or phone logs. Remove anything private.
+      render: text
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: "macOS only: Orbit has Accessibility permission (System Settings > Privacy & Security > Accessibility)."
+        - label: "Windows only: TCP and UDP port 47821 are allowed in the firewall."

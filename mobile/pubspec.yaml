@@ -1,0 +1,33 @@
+name: orbit
+description: Orbit turns your phone into a premium trackpad, air pointer, keyboard and media remote for your Mac and Windows computers.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # mDNS / Bonjour discovery of _orbit._tcp. Pinned to the 5.x API
+  # (BonsoirDiscovery.ready / eventStream / service.resolve(serviceResolver)).
+  bonsoir: ^5.1.0
+  # X25519, HKDF-SHA256, ChaCha20-Poly1305 (pure Dart, works on every platform).
+  cryptography: ^2.7.0
+  # Gyroscope + accelerometer for Air mode.
+  sensors_plus: ^6.0.1
+  # Paired hosts + settings (v1). v2: move keys to flutter_secure_storage.
+  shared_preferences: ^2.2.3
+  # Prism type: Instrument Sans (UI) + Martian Mono (tiny caps).
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  shaders:
+    - shaders/spectral.frag
