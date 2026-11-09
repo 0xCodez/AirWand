@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   # mDNS / Bonjour discovery of _orbit._tcp. Pinned to the 5.x API
   # (BonsoirDiscovery.ready / eventStream / service.resolve(serviceResolver)).
-  bonsoir: ^5.1.0
+  bonsoir: ^7.1.6
   # X25519, HKDF-SHA256, ChaCha20-Poly1305 (pure Dart, works on every platform).
   cryptography: ^2.7.0
   # Gyroscope + accelerometer for Air mode.
