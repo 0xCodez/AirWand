@@ -53,8 +53,8 @@ class Haptics {
 }
 
 /// App-wide services, created once in main().
-class OrbitServices {
-  OrbitServices._({
+class AirWandServices {
+  AirWandServices._({
     required this.prefs,
     required this.settings,
     required this.identity,
@@ -70,13 +70,13 @@ class OrbitServices {
   final ControlClient control;
   final Haptics haptics;
 
-  static Future<OrbitServices> create(SharedPreferences prefs) async {
+  static Future<AirWandServices> create(SharedPreferences prefs) async {
     final settings = AppSettings(prefs);
     final identity = await DeviceIdentity.load(prefs);
     final hosts = HostStore(prefs);
     final control = ControlClient(deviceId: identity.deviceId);
     control.onHostOs = (id, os) => hosts.updateEndpoint(id, os: os);
-    return OrbitServices._(
+    return AirWandServices._(
       prefs: prefs,
       settings: settings,
       identity: identity,
@@ -87,18 +87,18 @@ class OrbitServices {
   }
 }
 
-class OrbitScope extends InheritedWidget {
-  const OrbitScope({super.key, required this.services, required super.child});
+class AirWandScope extends InheritedWidget {
+  const AirWandScope({super.key, required this.services, required super.child});
 
-  final OrbitServices services;
+  final AirWandServices services;
 
-  static OrbitServices of(BuildContext context) {
-    final scope = context.getInheritedWidgetOfExactType<OrbitScope>();
-    assert(scope != null, 'OrbitScope missing above this widget');
+  static AirWandServices of(BuildContext context) {
+    final scope = context.getInheritedWidgetOfExactType<AirWandScope>();
+    assert(scope != null, 'AirWandScope missing above this widget');
     return scope!.services;
   }
 
   @override
-  bool updateShouldNotify(OrbitScope oldWidget) =>
+  bool updateShouldNotify(AirWandScope oldWidget) =>
       services != oldWidget.services;
 }

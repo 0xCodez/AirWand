@@ -87,14 +87,14 @@ jobs:
       - name: Rename APK
         run: |
           mkdir -p dist
-          cp build/app/outputs/flutter-apk/app-release.apk dist/orbit-android.apk
+          cp build/app/outputs/flutter-apk/app-release.apk dist/airwand-android.apk
           ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: orbit-android
-          path: mobile/dist/orbit-android.apk
+          name: airwand-android
+          path: mobile/dist/airwand-android.apk
           if-no-files-found: error
           retention-days: 30
 
@@ -137,15 +137,15 @@ jobs:
           rm -rf dist Payload
           mkdir -p dist Payload
           cp -R build/ios/iphoneos/Runner.app Payload/
-          zip -qry dist/orbit-ios-unsigned.ipa Payload
+          zip -qry dist/airwand-ios-unsigned.ipa Payload
           rm -rf Payload
           ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: orbit-ios
-          path: mobile/dist/orbit-ios-unsigned.ipa
+          name: airwand-ios
+          path: mobile/dist/airwand-ios-unsigned.ipa
           if-no-files-found: error
           retention-days: 30
 
@@ -171,9 +171,9 @@ jobs:
         with:
           tag_name: ${{ inputs.release_tag || github.ref_name }}
           target_commitish: ${{ github.sha }}
-          name: Orbit ${{ inputs.release_tag || github.ref_name }}
+          name: AirWand ${{ inputs.release_tag || github.ref_name }}
           files: |
-            release-assets/orbit-android.apk
-            release-assets/orbit-ios-unsigned.ipa
+            release-assets/airwand-android.apk
+            release-assets/airwand-ios-unsigned.ipa
           fail_on_unmatched_files: true
           generate_release_notes: true

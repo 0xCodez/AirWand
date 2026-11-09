@@ -1,9 +1,9 @@
-//! Orbit desktop host agent.
+//! AirWand desktop host agent.
 //!
 //! Threads:
 //! * main — tao event loop, tray icon/menu, macOS pairing dialogs (AppKit wants them here)
-//! * `orbit-pairing` — TCP 47821 pairing server (one short-lived thread per connection)
-//! * `orbit-control` — UDP 47821: discovery probe replies, encrypted control packets,
+//! * `airwand-pairing` — TCP 47821 pairing server (one short-lived thread per connection)
+//! * `airwand-control` — UDP 47821: discovery probe replies, encrypted control packets,
 //!   input injection and the 3 s safety watchdog
 //! * mdns-sd's own daemon thread — `_orbit._tcp` advertisement
 
@@ -51,13 +51,13 @@ fn main() {
     init_logging();
     if let Err(e) = run() {
         log::error!("{e:#}");
-        eprintln!("orbit: {e:#}");
+        eprintln!("airwand: {e:#}");
         std::process::exit(1);
     }
 }
 
 fn run() -> Result<()> {
-    log::info!("Orbit {} starting", env!("CARGO_PKG_VERSION"));
+    log::info!("AirWand {} starting", env!("CARGO_PKG_VERSION"));
     let config = Config::load_or_create().context("loading configuration")?;
     let app = Arc::new(App::new(config));
     log::info!("host \"{}\" id {}", app.host_name(), config::id_hex(&app.host_id()));
@@ -68,16 +68,16 @@ fn run() -> Result<()> {
     app.input_permitted.store(permitted, Ordering::Relaxed);
     if !permitted {
         log::warn!(
-            "Accessibility permission is missing: Orbit cannot move the pointer or type. \
-             Enable Orbit in System Settings → Privacy & Security → Accessibility, then restart Orbit."
+            "Accessibility permission is missing: AirWand cannot move the pointer or type. \
+             Enable AirWand in System Settings → Privacy & Security → Accessibility, then restart AirWand."
         );
     }
 
     // Bind both sockets up front so a second instance fails loudly instead of half-working.
     let udp = UdpSocket::bind((Ipv4Addr::UNSPECIFIED, PORT))
-        .with_context(|| format!("binding UDP port {PORT} (is Orbit already running?)"))?;
+        .with_context(|| format!("binding UDP port {PORT} (is AirWand already running?)"))?;
     let tcp = TcpListener::bind((Ipv4Addr::UNSPECIFIED, PORT))
-        .with_context(|| format!("binding TCP port {PORT} (is Orbit already running?)"))?;
+        .with_context(|| format!("binding TCP port {PORT} (is AirWand already running?)"))?;
 
     #[allow(unused_mut)]
     let mut event_loop = EventLoopBuilder::<UiEvent>::with_user_event().build();
@@ -112,14 +112,14 @@ fn run() -> Result<()> {
     {
         let app = app.clone();
         std::thread::Builder::new()
-            .name("orbit-pairing".into())
+            .name("airwand-pairing".into())
             .spawn(move || pairing::serve(tcp, app))
             .context("spawning pairing thread")?;
     }
     {
         let app = app.clone();
         std::thread::Builder::new()
-            .name("orbit-control".into())
+            .name("airwand-control".into())
             .spawn(move || control::run(udp, app))
             .context("spawning control thread")?;
     }

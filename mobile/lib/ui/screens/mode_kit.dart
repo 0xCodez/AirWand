@@ -10,12 +10,12 @@ import '../../state/scope.dart';
 import '../prism/prism.dart';
 
 /// Spectrum of the active computer (Mac / Windows palette).
-List<Color> activeSpectrum(OrbitServices s) {
+List<Color> activeSpectrum(AirWandServices s) {
   final h = s.control.host ?? s.hosts.active;
   return P.spectrumFor(h?.os.wire ?? 'mac');
 }
 
-PairedHost? activeHost(OrbitServices s) => s.control.host ?? s.hosts.active;
+PairedHost? activeHost(AirWandServices s) => s.control.host ?? s.hosts.active;
 
 /// Tiny uppercase Martian Mono caption (`.cap` in the prototype).
 class Cap extends StatelessWidget {

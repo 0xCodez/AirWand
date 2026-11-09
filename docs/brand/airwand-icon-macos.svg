@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="trail" x1="255" y1="585" x2="660" y2="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#26C8FF" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#2E5CFF" stop-opacity="0.55"/>
+      <stop offset="0.7" stop-color="#9646FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FF3496"/>
+    </linearGradient>
+    <linearGradient id="wand" x1="250" y1="790" x2="650" y2="390" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F4F6" stop-opacity="0.18"/>
+      <stop offset="0.55" stop-color="#F4F4F6" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.18" stop-color="#26C8FF" stop-opacity="0.75"/>
+      <stop offset="0.45" stop-color="#9646FF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FF3496" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2E5CFF" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#26C8FF" stop-opacity="0.7"/>
+      <stop offset="0.5" stop-color="#FFFFFF"/>
+      <stop offset="0.65" stop-color="#9646FF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#FF3496" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur40" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="blur12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  
+    <radialGradient id="bgGlow" cx="0.68" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#16102A"/>
+      <stop offset="0.55" stop-color="#05050A"/>
+      <stop offset="1" stop-color="#010102"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="sq"><rect x="100" y="100" width="824" height="824" rx="185"/></clipPath>
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-opacity="0.45"/></filter>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="#010102" filter="url(#drop)"/>
+  <g clip-path="url(#sq)"><g transform="translate(100 100) scale(0.8046875)">
+  <rect width="1024" height="1024" fill="url(#bgGlow)"/>
+  <rect width="1024" height="1024" fill="url(#sheen)"/>
+  <g id="art" transform="translate(-40 40)">
+  <!-- air trail: a cursor path swept by the wand -->
+  <path d="M640 330 C 520 250, 330 300, 250 450 C 215 515, 230 560, 255 585" fill="none" stroke="url(#trail)" stroke-width="44" stroke-linecap="round" filter="url(#blur12)" opacity="0.9"/>
+  <path d="M640 330 C 520 250, 330 300, 250 450 C 215 515, 230 560, 255 585" fill="none" stroke="url(#trail)" stroke-width="14" stroke-linecap="round"/>
+  <!-- wand -->
+  <line x1="300" y1="760" x2="640" y2="420" stroke="#000" stroke-opacity="0.6" stroke-width="64" stroke-linecap="round" filter="url(#blur12)"/>
+  <line x1="300" y1="760" x2="640" y2="420" stroke="url(#wand)" stroke-width="52" stroke-linecap="round"/>
+  <line x1="290" y1="750" x2="630" y2="410" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="7" stroke-linecap="round"/>
+  <line x1="318" y1="770" x2="648" y2="440" stroke="#26C8FF" stroke-opacity="0.45" stroke-width="5" stroke-linecap="round"/>
+  <!-- tip glow -->
+  <circle cx="690" cy="345" r="300" fill="url(#glow)" filter="url(#blur40)"/>
+  <!-- anamorphic streak -->
+  <ellipse cx="690" cy="345" rx="300" ry="9" fill="url(#streak)" filter="url(#blur4)"/>
+  <ellipse cx="690" cy="345" rx="230" ry="3" fill="url(#streak)"/>
+  <!-- four-point sparkle -->
+  <path d="M690 205 C 700 300, 735 335, 830 345 C 735 355, 700 390, 690 485 C 680 390, 645 355, 550 345 C 645 335, 680 300, 690 205 Z" fill="#FFFFFF" filter="url(#blur12)" opacity="0.7"/>
+  <path d="M690 205 C 700 300, 735 335, 830 345 C 735 355, 700 390, 690 485 C 680 390, 645 355, 550 345 C 645 335, 680 300, 690 205 Z" fill="#FFFFFF"/>
+  <circle cx="790" cy="230" r="9" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="585" cy="250" r="5" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+
+</g></g>
+  <rect x="100.5" y="100.5" width="823" height="823" rx="185" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="2"/>
+</svg>

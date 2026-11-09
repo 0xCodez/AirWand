@@ -1,6 +1,6 @@
 # Roadmap
 
-Orbit is pre-1.0. This is a direction, not a promise; priorities move with feedback. Ideas and votes are welcome in issues.
+AirWand is pre-1.0. This is a direction, not a promise; priorities move with feedback. Ideas and votes are welcome in issues.
 
 ## v0.1 — First flight (this release)
 
@@ -15,7 +15,7 @@ The full loop, phone to computer, on a local network.
 - **Multi-computer:** several paired hosts, three-finger swipe or host pill to switch.
 - **Distribution:** GitHub Releases: ad-hoc signed macOS app, unsigned Windows exe, debug-signed APK, unsigned IPA for sideloading.
 
-## v0.2 — Wider orbit
+## v0.2 — Wider reach
 
 ### Protocol and security
 
@@ -50,5 +50,5 @@ The full loop, phone to computer, on a local network.
 
 ## Not planned
 
-- Cloud relay or remote control over the internet. Orbit stays on your local network.
+- Cloud relay or remote control over the internet. AirWand stays on your local network.
 - Accounts, telemetry or ads.

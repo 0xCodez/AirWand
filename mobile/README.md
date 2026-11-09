@@ -1,8 +1,8 @@
-# Orbit — phone app (Flutter)
+# AirWand — phone app (Flutter)
 
 One codebase for **iPhone**, **Android** and **Solana Seeker / Saga** (Android).
 It turns the phone into a trackpad, air pointer, keyboard and media remote for
-computers running the Orbit desktop agent, and lets you flick between several
+computers running the AirWand desktop agent, and lets you flick between several
 paired computers.
 
 The wire protocol is in [`../docs/PROTOCOL.md`](../docs/PROTOCOL.md) and the
@@ -12,7 +12,7 @@ visual language in [`../docs/DESIGN.md`](../docs/DESIGN.md).
 
 ```
 mobile/
-  pubspec.yaml            name: orbit, Dart >=3.4, Flutter >=3.22
+  pubspec.yaml            name: airwand, Dart >=3.4, Flutter >=3.22
   lib/
     main.dart             wiring: no paired hosts → Discovery, else Control
     net/                  protocol.dart · pairing.dart · discovery.dart · control.dart · hosts.dart
@@ -36,9 +36,9 @@ The patches it applies:
 
 | file | change |
 |------|--------|
-| `android/app/src/main/AndroidManifest.xml` | `INTERNET`, `ACCESS_NETWORK_STATE`, `ACCESS_WIFI_STATE`, `CHANGE_WIFI_MULTICAST_STATE`, `VIBRATE`; app label **Orbit** |
+| `android/app/src/main/AndroidManifest.xml` | `INTERNET`, `ACCESS_NETWORK_STATE`, `ACCESS_WIFI_STATE`, `CHANGE_WIFI_MULTICAST_STATE`, `VIBRATE`; app label **AirWand** |
 | `android/app/build.gradle(.kts)` | `minSdk` at least 23 |
-| `ios/Runner/Info.plist` | `NSLocalNetworkUsageDescription`, `NSBonjourServices = [_orbit._tcp]`, `NSMotionUsageDescription`, `CFBundleDisplayName = Orbit`, light status bar, portrait only |
+| `ios/Runner/Info.plist` | `NSLocalNetworkUsageDescription`, `NSBonjourServices = [_orbit._tcp]`, `NSMotionUsageDescription`, `CFBundleDisplayName = AirWand`, light status bar, portrait only |
 | `ios/Runner.xcodeproj`, `ios/Podfile`, `AppFrameworkInfo.plist` | iOS deployment target at least 13.0 (bonsoir uses `NWBrowser`) |
 
 ## Prerequisites
@@ -50,7 +50,7 @@ The patches it applies:
   or `brew install cocoapods`).
 - **Android / Seeker / Saga:** Android Studio or the Android SDK command-line
   tools, plus a USB cable.
-- The Orbit desktop agent running on the Mac / Windows PC, on the **same
+- The AirWand desktop agent running on the Mac / Windows PC, on the **same
   Wi-Fi network** as the phone.
 
 ## First run
@@ -68,8 +68,8 @@ flutter run                 # pick a connected device
 2. `open ios/Runner.xcworkspace`, select the **Runner** target →
    *Signing & Capabilities* → tick *Automatically manage signing* and pick
    your **Personal Team** (sign in with any Apple ID in Xcode → Settings →
-   Accounts). If the bundle id `app.orbit.orbit` is taken, change it to
-   something unique such as `app.orbit.yourname`.
+   Accounts). If the bundle id `app.airwand` is taken, change it to
+   something unique such as `app.airwand.yourname`.
 3. On the iPhone enable **Developer Mode**: Settings → Privacy & Security →
    Developer Mode → On, then restart (iOS 16+).
 4. `flutter run --release` (or Run from Xcode).
@@ -82,10 +82,10 @@ removes the limit.
 
 ### Local Network permission on iOS
 
-iOS asks *“Orbit would like to find and connect to devices on your local
+iOS asks *“AirWand would like to find and connect to devices on your local
 network”* the first time the app browses for computers. Tap **Allow** — without
 it neither discovery nor the control channel can reach the computer. If you
-declined: Settings → Privacy & Security → Local Network → Orbit.
+declined: Settings → Privacy & Security → Local Network → AirWand.
 
 Notes:
 
@@ -105,7 +105,7 @@ Notes:
 2. Connect the phone, accept the RSA prompt, check with `flutter devices`.
 3. `flutter run --release`.
 
-Or install a prebuilt APK: download `orbit-*.apk` from the project's
+Or install a prebuilt APK: download `airwand-*.apk` from the project's
 **GitHub Releases**, open it on the phone and allow *Install unknown apps* for
 your browser or file manager when asked. (Build one yourself with
 `flutter build apk --release`.)

@@ -8,7 +8,7 @@
 
 /// Shows the dialog and blocks until the user answers. Returns `true` for Allow.
 pub fn confirm_pairing(device_name: &str, code_display: &str) -> bool {
-    let title = "Orbit — pairing request";
+    let title = "AirWand — pairing request";
     let message = format!(
         "Allow “{device_name}” to control this computer?\n\nCode {code_display}\n\n\
          Only allow it if your phone shows the same code."
@@ -23,7 +23,7 @@ mod imp {
     use rfd::{MessageButtons, MessageDialog, MessageDialogResult, MessageLevel};
 
     /// An `Accessory` (menu-bar only) app is never active on its own, so a modal alert
-    /// would open behind the frontmost app. Bring Orbit forward first (main thread only).
+    /// would open behind the frontmost app. Bring AirWand forward first (main thread only).
     fn activate_app() {
         unsafe {
             let app: *mut Object = msg_send![class!(NSApplication), sharedApplication];

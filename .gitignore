@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# Orbit root .gitignore
+# AirWand root .gitignore
 # Platform-specific Flutter ignores live in mobile/.gitignore.
 # ---------------------------------------------------------------
 
@@ -37,7 +37,7 @@ $RECYCLE.BIN/
 node_modules/
 coverage/
 
-# Desktop agent (Rust). Cargo.lock IS committed: orbit-desktop is a binary.
+# Desktop agent (Rust). Cargo.lock IS committed: airwand-desktop is a binary.
 desktop/target/
 desktop/dist/
 **/*.rs.bk

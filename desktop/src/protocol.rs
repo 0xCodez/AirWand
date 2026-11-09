@@ -1,4 +1,4 @@
-//! Orbit wire protocol v1 — see `docs/PROTOCOL.md`, which is the binding contract.
+//! AirWand wire protocol v1 — see `docs/PROTOCOL.md`, which is the binding contract.
 //!
 //! ```text
 //! packet    = header(19) | nonce(12) | ciphertext | tag(16)
@@ -511,7 +511,7 @@ a919ceb796abcb6891e316d81ee0beaddb0120913975e519fb9c1ca001";
             Message::Scroll { dx: 0.5, dy: -12.75 },
             Message::Gesture(5),
             Message::Key { action: key_action::TAP, mods: mods::META | mods::SHIFT, usage: 0x52 },
-            Message::Text("Привет, Orbit ✨".to_string()),
+            Message::Text("Привет, AirWand ✨".to_string()),
             Message::Media(4),
             Message::Aim { yaw: -0.1, pitch: 0.05 },
             Message::Ping,

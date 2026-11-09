@@ -39,7 +39,7 @@ class _MediaViewState extends State<MediaView> with TickerProviderStateMixin {
   int _flash = 0;
   Timer? _flashT;
 
-  OrbitServices get _s => OrbitScope.of(context);
+  AirWandServices get _s => AirWandScope.of(context);
 
   @override
   void dispose() {

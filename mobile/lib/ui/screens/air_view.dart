@@ -24,7 +24,7 @@ class AirView extends StatefulWidget {
 
 class _AirViewState extends State<AirView> with SingleTickerProviderStateMixin {
   final AirTracker _air = AirTracker();
-  OrbitServices? _s;
+  AirWandServices? _s;
   late final Ticker _ticker = createTicker(_tick);
   Duration _last = Duration.zero;
   double _t = 0;
@@ -71,7 +71,7 @@ class _AirViewState extends State<AirView> with SingleTickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _s ??= OrbitScope.of(context);
+    _s ??= AirWandScope.of(context);
   }
 
   (double, double) get _aim {
@@ -204,7 +204,7 @@ class _AirViewState extends State<AirView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final s = OrbitScope.of(context);
+    final s = AirWandScope.of(context);
     final spectrum = activeSpectrum(s);
     final host = activeHost(s);
     final (yaw, pitch) = _aim;

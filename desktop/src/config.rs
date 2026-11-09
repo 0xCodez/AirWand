@@ -1,6 +1,6 @@
 //! Persistent host state: hostId, host name and paired devices, stored as JSON in the
-//! platform config dir (`~/Library/Application Support/Orbit/config.json`,
-//! `%APPDATA%\Orbit\config.json`).
+//! platform config dir (`~/Library/Application Support/AirWand/config.json`,
+//! `%APPDATA%\AirWand\config.json`).
 
 use std::fs;
 use std::io::Write;
@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use crate::crypto;
 use crate::protocol::{DeviceId, HostId, SessionKey, ID_LEN, KEY_LEN};
 
-const APP_DIR: &str = "Orbit";
+const APP_DIR: &str = "AirWand";
 const FILE_NAME: &str = "config.json";
 
 #[derive(Serialize, Deserialize)]
@@ -228,7 +228,7 @@ fn open_private_file(path: &Path) -> Result<fs::File> {
 pub fn open_log_file() -> Option<fs::File> {
     let dir = config_dir().ok()?;
     fs::create_dir_all(&dir).ok()?;
-    let path = dir.join("orbit.log");
+    let path = dir.join("airwand.log");
     // Keep it small: start over once it passes 1 MiB.
     let too_big = fs::metadata(&path).map(|m| m.len() > 1 << 20).unwrap_or(false);
     let mut opts = fs::OpenOptions::new();
@@ -258,7 +258,7 @@ mod tests {
 
     #[test]
     fn save_and_load_round_trip() {
-        let dir = std::env::temp_dir().join(format!("orbit-test-{}", hex::encode(crypto::random_bytes::<6>())));
+        let dir = std::env::temp_dir().join(format!("airwand-test-{}", hex::encode(crypto::random_bytes::<6>())));
         fs::create_dir_all(&dir).unwrap();
         let path = dir.join(FILE_NAME);
         let mut cfg = Config {

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Builds a universal (Apple silicon + Intel) release of the Orbit host agent and wraps it
-# into dist/Orbit.app, ad-hoc signed.
+# Builds a universal (Apple silicon + Intel) release of the AirWand host agent and wraps it
+# into dist/AirWand.app, ad-hoc signed.
 #
 #   ./scripts/bundle-macos.sh            # build + bundle
-#   ./scripts/bundle-macos.sh --zip      # also produce dist/Orbit-macos.zip
+#   ./scripts/bundle-macos.sh --zip      # also produce dist/AirWand-macos.zip
 #
 # Requirements: macOS, Xcode command line tools (lipo, codesign, ditto), rustup.
 set -euo pipefail
@@ -17,8 +17,8 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
 fi
 
 TARGETS=(aarch64-apple-darwin x86_64-apple-darwin)
-BIN=orbit
-APP="dist/Orbit.app"
+BIN=airwand
+APP="dist/AirWand.app"
 VERSION="$(sed -n 's/^version *= *"\(.*\)"/\1/p' Cargo.toml | head -n 1)"
 export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-11.0}"
 
@@ -47,16 +47,19 @@ lipo -info "$APP/Contents/MacOS/$BIN"
 
 sed "s/__VERSION__/$VERSION/g" macos/Info.plist > "$APP/Contents/Info.plist"
 printf 'APPL????' > "$APP/Contents/PkgInfo"
+
+echo "==> app icon"
+iconutil -c icns macos/AppIcon.iconset -o "$APP/Contents/Resources/AppIcon.icns"
 plutil -lint "$APP/Contents/Info.plist"
 
 echo "==> ad-hoc signing"
-codesign --force --deep --sign - --identifier app.orbit.desktop "$APP"
+codesign --force --deep --sign - --identifier app.airwand.desktop "$APP"
 codesign --verify --verbose=2 "$APP"
 
 if [[ "${1:-}" == "--zip" ]]; then
   echo "==> zipping"
-  rm -f dist/Orbit-macos.zip
-  ditto -c -k --keepParent "$APP" dist/Orbit-macos.zip
+  rm -f dist/AirWand-macos.zip
+  ditto -c -k --keepParent "$APP" dist/AirWand-macos.zip
 fi
 
 cat <<EOF
@@ -65,9 +68,9 @@ Built $APP
 
 First run:
   open "$APP"
-  Grant Accessibility: System Settings → Privacy & Security → Accessibility → enable Orbit.
+  Grant Accessibility: System Settings → Privacy & Security → Accessibility → enable AirWand.
   Allow "Local Network" when macOS asks (needed for Bonjour discovery).
 
 Note: an ad-hoc signature changes on every build, so macOS may ask for Accessibility
-again after you rebuild (remove the old Orbit entry from the list, then add the new one).
+again after you rebuild (remove the old AirWand entry from the list, then add the new one).
 EOF

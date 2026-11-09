@@ -1,6 +1,6 @@
-# Contributing to Orbit
+# Contributing to AirWand
 
-Thanks for helping. Orbit is two programs that must agree byte for byte: the phone app in `mobile/` and the desktop agent in `desktop/`. Most of the rules below exist to keep them in sync.
+Thanks for helping. AirWand is two programs that must agree byte for byte: the phone app in `mobile/` and the desktop agent in `desktop/`. Most of the rules below exist to keep them in sync.
 
 ## Ground rules
 
@@ -16,7 +16,7 @@ Thanks for helping. Orbit is two programs that must agree byte for byte: the pho
 |---|---|---|
 | Toolchain | Rust stable via [rustup](https://rustup.rs) | Rust stable via rustup (`x86_64-pc-windows-msvc`) |
 | System | Xcode Command Line Tools (`xcode-select --install`) | Visual Studio Build Tools, workload "Desktop development with C++" |
-| Permission | Grant **Accessibility** to your terminal (when running `cargo run`) or to `Orbit.app` | Allow TCP+UDP 47821 (`desktop/scripts/firewall-windows.ps1`, run as Administrator) |
+| Permission | Grant **Accessibility** to your terminal (when running `cargo run`) or to `AirWand.app` | Allow TCP+UDP 47821 (`desktop/scripts/firewall-windows.ps1`, run as Administrator) |
 
 ```bash
 cd desktop
@@ -30,10 +30,10 @@ macOS universal bundle:
 
 ```bash
 rustup target add aarch64-apple-darwin x86_64-apple-darwin
-bash scripts/bundle-macos.sh      # -> desktop/dist/Orbit.app (ad-hoc signed)
+bash scripts/bundle-macos.sh      # -> desktop/dist/AirWand.app (ad-hoc signed)
 ```
 
-Tip: macOS ties the Accessibility grant to the binary's signature. After rebuilding the bundle you may have to remove Orbit from *Privacy & Security → Accessibility* and add it again.
+Tip: macOS ties the Accessibility grant to the binary's signature. After rebuilding the bundle you may have to remove AirWand from *Privacy & Security → Accessibility* and add it again.
 
 Linux is not a supported host in v0.1 (see [docs/ROADMAP.md](docs/ROADMAP.md)), and CI does not build on Linux.
 
@@ -108,8 +108,8 @@ There are two workflows, each triggered only by changes in its own folder:
 
 | Workflow | Runs on | Produces |
 |---|---|---|
-| `.github/workflows/desktop.yml` | `macos-latest`, `windows-latest` | `Orbit-macos-universal.zip`, `orbit-windows-x64.exe`, `firewall-windows.ps1` |
-| `.github/workflows/mobile.yml` | `ubuntu-latest` (Android), `macos-latest` (iOS) | `orbit-android.apk`, `orbit-ios-unsigned.ipa` |
+| `.github/workflows/desktop.yml` | `macos-latest`, `windows-latest` | `AirWand-macos-universal.zip`, `airwand-windows-x64.exe`, `firewall-windows.ps1` |
+| `.github/workflows/mobile.yml` | `ubuntu-latest` (Android), `macos-latest` (iOS) | `airwand-android.apk`, `airwand-ios-unsigned.ipa` |
 
 Builds of every push and PR are available as workflow artifacts for 30 days.
 

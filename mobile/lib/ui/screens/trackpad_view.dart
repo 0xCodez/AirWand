@@ -63,7 +63,7 @@ enum _Badge { none, dragging, locked }
 
 class _TrackpadViewState extends State<TrackpadView>
     with SingleTickerProviderStateMixin {
-  late OrbitServices _s;
+  late AirWandServices _s;
   TrackpadEngine? _engine;
   late final Ticker _ticker;
   Duration _last = Duration.zero;
@@ -90,7 +90,7 @@ class _TrackpadViewState extends State<TrackpadView>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_engine != null) return;
-    _s = OrbitScope.of(context);
+    _s = AirWandScope.of(context);
     final control = _s.control;
     final m = widget.model;
     _engine = TrackpadEngine(

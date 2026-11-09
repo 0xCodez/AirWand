@@ -121,11 +121,11 @@ class HostDiscovery extends ChangeNotifier {
       if (!_running) return;
       _bonsoirSub = discovery.eventStream?.listen(
         _onMdnsEvent,
-        onError: (Object e) => debugPrint('Orbit mDNS error: $e'),
+        onError: (Object e) => debugPrint('AirWand mDNS error: $e'),
       );
       await discovery.start();
     } catch (e) {
-      debugPrint('Orbit: mDNS discovery unavailable: $e');
+      debugPrint('AirWand: mDNS discovery unavailable: $e');
     }
   }
 
@@ -226,14 +226,14 @@ class HostDiscovery extends ChangeNotifier {
           if (d == null) break;
           _onBroadcastReply(d);
         }
-      }, onError: (Object e) => debugPrint('Orbit UDP discovery error: $e'));
+      }, onError: (Object e) => debugPrint('AirWand UDP discovery error: $e'));
       _sendProbe();
       _probeTimer = Timer.periodic(
         const Duration(seconds: 2),
         (_) => _sendProbe(),
       );
     } catch (e) {
-      debugPrint('Orbit: UDP discovery unavailable: $e');
+      debugPrint('AirWand: UDP discovery unavailable: $e');
     }
   }
 
@@ -248,7 +248,7 @@ class HostDiscovery extends ChangeNotifier {
       );
     } catch (e) {
       // iOS needs the multicast entitlement to broadcast; mDNS still works.
-      debugPrint('Orbit: broadcast probe failed: $e');
+      debugPrint('AirWand: broadcast probe failed: $e');
     }
   }
 
@@ -269,7 +269,7 @@ class HostDiscovery extends ChangeNotifier {
         sources: const <DiscoverySource>{DiscoverySource.broadcast},
       ));
     } catch (_) {
-      // Not an Orbit reply; ignore.
+      // Not an AirWand reply; ignore.
     }
   }
 

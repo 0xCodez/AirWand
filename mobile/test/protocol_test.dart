@@ -8,9 +8,9 @@ import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:orbit/net/protocol.dart';
-import 'package:orbit/ui/screens/keys_view.dart' show diffTyping;
-import 'package:orbit/ui/screens/discovery_screen.dart' show parseHostPort;
+import 'package:airwand/net/protocol.dart';
+import 'package:airwand/ui/screens/keys_view.dart' show diffTyping;
+import 'package:airwand/ui/screens/discovery_screen.dart' show parseHostPort;
 
 Uint8List seq(int length, int start) =>
     Uint8List.fromList(List<int>.generate(length, (i) => (start + i) & 0xff));

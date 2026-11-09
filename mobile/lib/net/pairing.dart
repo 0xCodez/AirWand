@@ -98,7 +98,7 @@ class PairingSession extends ChangeNotifier {
       }
       if ((hello['v'] as num?)?.toInt() != Proto.version) {
         throw const _PairingFailure(
-          'This computer runs a different Orbit version. Update both apps.',
+          'This computer runs a different AirWand version. Update both apps.',
         );
       }
       final hostIdHex = (hello['hostId'] as String? ?? '').toLowerCase();
@@ -174,7 +174,7 @@ class PairingSession extends ChangeNotifier {
     } on SocketException catch (e) {
       _fail(_describeSocketError(e));
     } catch (e) {
-      debugPrint('Orbit pairing error: $e');
+      debugPrint('AirWand pairing error: $e');
       _fail('Something went wrong while pairing.');
     } finally {
       try {
@@ -216,7 +216,7 @@ class PairingSession extends ChangeNotifier {
     final code = e.osError?.errorCode;
     // ECONNREFUSED: 61 (darwin), 111 (linux/android)
     if (code == 61 || code == 111) {
-      return 'Orbit is not running on that computer.';
+      return 'AirWand is not running on that computer.';
     }
     // EHOSTUNREACH / ENETUNREACH
     if (code == 65 || code == 113 || code == 51 || code == 101) {

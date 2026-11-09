@@ -1,4 +1,4 @@
-# Orbit Architecture
+# AirWand Architecture
 
 This document explains how the pieces fit together. The wire format itself is defined only in [PROTOCOL.md](PROTOCOL.md), and the look and feel only in [DESIGN.md](DESIGN.md); this file refers to them and does not redefine them. It describes the design both implementations follow; module and file names in `desktop/src` and `mobile/lib` may differ in detail.
 
@@ -23,7 +23,7 @@ flowchart TB
         Store --> Session --> Codec
     end
 
-    subgraph Desktop["desktop/ (Rust agent, binary orbit)"]
+    subgraph Desktop["desktop/ (Rust agent, binary airwand)"]
         direction TB
         Tray["Tray / menu bar + pairing dialog"]
         Adv["mDNS advertiser<br/>_orbit._tcp"]
@@ -109,9 +109,9 @@ stateDiagram-v2
 ```mermaid
 sequenceDiagram
     autonumber
-    participant P as Phone (Orbit app)
+    participant P as Phone (AirWand app)
     participant N as LAN (multicast / broadcast)
-    participant H as Host (orbit agent)
+    participant H as Host (airwand agent)
 
     H->>N: mDNS announce _orbit._tcp port 47821, TXT id, name, os, v=1
     P->>N: mDNS browse _orbit._tcp

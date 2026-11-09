@@ -1,5 +1,5 @@
 name: Bug report
-description: Something in Orbit does not work as expected.
+description: Something in AirWand does not work as expected.
 title: "[bug] "
 labels: ["bug"]
 body:
@@ -62,9 +62,9 @@ body:
       placeholder: "macOS 26.1 / Windows 11 24H2"
 
   - type: input
-    id: orbit-version
+    id: airwand-version
     attributes:
-      label: Orbit version
+      label: AirWand version
       description: Release tag or commit SHA of the app and the agent.
       placeholder: "v0.1.0"
     validations:
@@ -95,7 +95,7 @@ body:
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. Open Orbit on the phone
+        1. Open AirWand on the phone
         2. Pair with "My MacBook"
         3. Two-finger scroll in Safari
         4. ...
@@ -106,7 +106,7 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: Desktop agent output (run `orbit` from a terminal) or phone logs. Remove anything private.
+      description: Desktop agent output (run `airwand` from a terminal) or phone logs. Remove anything private.
       render: text
 
   - type: checkboxes
@@ -116,5 +116,5 @@ body:
       options:
         - label: I searched existing issues and this is not a duplicate.
           required: true
-        - label: "macOS only: Orbit has Accessibility permission (System Settings > Privacy & Security > Accessibility)."
+        - label: "macOS only: AirWand has Accessibility permission (System Settings > Privacy & Security > Accessibility)."
         - label: "Windows only: TCP and UDP port 47821 are allowed in the firewall."

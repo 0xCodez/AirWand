@@ -1,4 +1,4 @@
-# Orbit Wire Protocol v1
+# AirWand Wire Protocol v1
 
 The single source of truth for how the phone app (`mobile/`) talks to the desktop agent (`desktop/`).
 Both sides MUST implement exactly this. If you change it, bump `v` and update both sides.

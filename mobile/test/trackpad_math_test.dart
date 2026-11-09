@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:orbit/input/trackpad_engine.dart';
-import 'package:orbit/input/trackpad_math.dart';
-import 'package:orbit/net/protocol.dart';
+import 'package:airwand/input/trackpad_engine.dart';
+import 'package:airwand/input/trackpad_math.dart';
+import 'package:airwand/net/protocol.dart';
 
 void main() {
   group('AccelerationCurve', () {

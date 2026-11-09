@@ -140,7 +140,7 @@ class _KeysViewState extends State<KeysView> {
     super.dispose();
   }
 
-  OrbitServices get _s => OrbitScope.of(context);
+  AirWandServices get _s => AirWandScope.of(context);
 
   void _addLog(String tag, String text) {
     _log.insert(0, _Log(tag, text));

@@ -71,7 +71,7 @@ pub fn serve(listener: TcpListener, app: Arc<App>) {
             Ok(stream) => {
                 let app = app.clone();
                 std::thread::Builder::new()
-                    .name("orbit-pairing-conn".into())
+                    .name("airwand-pairing-conn".into())
                     .spawn(move || {
                         let peer = stream.peer_addr().map(|a| a.to_string()).unwrap_or_else(|_| "?".into());
                         if let Err(e) = handle(stream, &app) {
@@ -224,7 +224,7 @@ fn ask_user(app: &App, device_name: &str, code: &str) -> mpsc::Receiver<bool> {
         let _ = app;
         let name = device_name.to_string();
         let code = code.to_string();
-        let spawned = std::thread::Builder::new().name("orbit-pairing-dialog".into()).spawn(move || {
+        let spawned = std::thread::Builder::new().name("airwand-pairing-dialog".into()).spawn(move || {
             let ok = dialog::confirm_pairing(&name, &code);
             let _ = tx.send(ok);
         });

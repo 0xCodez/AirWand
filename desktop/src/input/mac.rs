@@ -30,7 +30,7 @@ extern "C" {
 }
 
 /// `AXIsProcessTrustedWithOptions({kAXTrustedCheckOptionPrompt: true})` shows the system
-/// "Orbit would like to control this computer" prompt the first time.
+/// "AirWand would like to control this computer" prompt the first time.
 pub fn accessibility_trusted(prompt: bool) -> bool {
     unsafe {
         if !prompt {

@@ -351,7 +351,7 @@ class ControlClient extends ChangeNotifier {
         );
         socket.send(packet, target, port);
       } catch (e) {
-        debugPrint('Orbit send failed: $e');
+        debugPrint('AirWand send failed: $e');
       }
     });
     return seq;
@@ -365,11 +365,11 @@ class ControlClient extends ChangeNotifier {
         final s = await RawDatagramSocket.bind(InternetAddress.anyIPv4, 0);
         _socket = s;
         _socketSub = s.listen(_onSocketEvent, onError: (Object e) {
-          debugPrint('Orbit control socket error: $e');
+          debugPrint('AirWand control socket error: $e');
         });
         return s;
       } catch (e) {
-        debugPrint('Orbit: could not open UDP socket: $e');
+        debugPrint('AirWand: could not open UDP socket: $e');
         return null;
       } finally {
         _binding = null;

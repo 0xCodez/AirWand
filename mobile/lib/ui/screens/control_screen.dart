@@ -32,7 +32,7 @@ class ControlScreen extends StatefulWidget {
 
 class _ControlScreenState extends State<ControlScreen>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  late OrbitServices _s;
+  late AirWandServices _s;
   bool _init = false;
   final HostDiscovery _background = HostDiscovery();
   final SpectralController _spectral = SpectralController();
@@ -67,7 +67,7 @@ class _ControlScreenState extends State<ControlScreen>
     super.didChangeDependencies();
     if (_init) return;
     _init = true;
-    _s = OrbitScope.of(context);
+    _s = AirWandScope.of(context);
     WidgetsBinding.instance.addObserver(this);
     _s.hosts.addListener(_onHosts);
     _s.control.addListener(_onControl);

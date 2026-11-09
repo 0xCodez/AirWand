@@ -1,4 +1,4 @@
-// Prism spectral light field (Orbit). Rendered under black glass.
+// Prism spectral light field (AirWand). Rendered under black glass.
 //
 // Uniform layout (float index = FragmentShader.setFloat index):
 //   0..1   uSize    : vec2  paint size in logical px

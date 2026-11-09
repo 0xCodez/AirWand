@@ -142,7 +142,7 @@ class HostStore extends ChangeNotifier {
           }
         }
       } catch (e) {
-        debugPrint('Orbit: could not read paired hosts: $e');
+        debugPrint('AirWand: could not read paired hosts: $e');
       }
     }
     _activeId = _prefs.getString(_activeKey);

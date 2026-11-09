@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:orbit/motion/one_euro.dart';
-import 'package:orbit/motion/spring.dart';
+import 'package:airwand/motion/one_euro.dart';
+import 'package:airwand/motion/spring.dart';
 
 void main() {
   group('OneEuroFilter', () {

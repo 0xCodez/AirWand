@@ -9,7 +9,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:orbit/ui/prism/prism.dart';
+import 'package:airwand/ui/prism/prism.dart';
 
 import '../../net/discovery.dart';
 import '../../net/hosts.dart';
@@ -132,7 +132,7 @@ class PairingSheet extends StatefulWidget {
 
 class _PairingSheetState extends State<PairingSheet>
     with SingleTickerProviderStateMixin {
-  OrbitServices? _s;
+  AirWandServices? _s;
   PairingSession? _session;
   PairingPhase _phase = PairingPhase.connecting;
   late final Ticker _ticker;
@@ -164,7 +164,7 @@ class _PairingSheetState extends State<PairingSheet>
     super.didChangeDependencies();
     _reduce = MediaQuery.disableAnimationsOf(context);
     if (_s == null) {
-      _s = OrbitScope.of(context);
+      _s = AirWandScope.of(context);
       _start();
     }
   }

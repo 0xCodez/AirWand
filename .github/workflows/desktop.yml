@@ -81,20 +81,20 @@ jobs:
       - name: cargo build --release
         run: cargo build --release
 
-      - name: Bundle universal Orbit.app (ad-hoc signed)
+      - name: Bundle universal AirWand.app (ad-hoc signed)
         run: bash scripts/bundle-macos.sh
 
-      - name: Zip Orbit.app
+      - name: Zip AirWand.app
         run: |
-          test -d dist/Orbit.app
-          ditto -c -k --sequesterRsrc --keepParent dist/Orbit.app dist/Orbit-macos-universal.zip
+          test -d dist/AirWand.app
+          ditto -c -k --sequesterRsrc --keepParent dist/AirWand.app dist/AirWand-macos-universal.zip
           ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: orbit-macos
-          path: desktop/dist/Orbit-macos-universal.zip
+          name: airwand-macos
+          path: desktop/dist/AirWand-macos-universal.zip
           if-no-files-found: error
           retention-days: 30
 
@@ -134,19 +134,19 @@ jobs:
       - name: cargo build --release
         run: cargo build --release
 
-      - name: Collect orbit.exe
+      - name: Collect airwand.exe
         run: |
           mkdir -p dist
-          cp target/release/orbit.exe dist/orbit-windows-x64.exe
+          cp target/release/airwand.exe dist/airwand-windows-x64.exe
           cp scripts/firewall-windows.ps1 dist/firewall-windows.ps1
           ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: orbit-windows
+          name: airwand-windows
           path: |
-            desktop/dist/orbit-windows-x64.exe
+            desktop/dist/airwand-windows-x64.exe
             desktop/dist/firewall-windows.ps1
           if-no-files-found: error
           retention-days: 30
@@ -173,10 +173,10 @@ jobs:
         with:
           tag_name: ${{ inputs.release_tag || github.ref_name }}
           target_commitish: ${{ github.sha }}
-          name: Orbit ${{ inputs.release_tag || github.ref_name }}
+          name: AirWand ${{ inputs.release_tag || github.ref_name }}
           files: |
-            release-assets/Orbit-macos-universal.zip
-            release-assets/orbit-windows-x64.exe
+            release-assets/AirWand-macos-universal.zip
+            release-assets/airwand-windows-x64.exe
             release-assets/firewall-windows.ps1
           fail_on_unmatched_files: true
           generate_release_notes: true

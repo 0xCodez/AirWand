@@ -1,6 +1,6 @@
-# Orbit for Mac & Windows (host agent)
+# AirWand for Mac & Windows (host agent)
 
-A small menu-bar / tray app that lets a paired phone running Orbit act as a trackpad, air
+A small menu-bar / tray app that lets a paired phone running AirWand act as a trackpad, air
 pointer, keyboard and media remote for this computer. It implements the **Host** side of
 [`docs/PROTOCOL.md`](../docs/PROTOCOL.md) (v1).
 
@@ -17,7 +17,7 @@ Requires a stable Rust toolchain (1.77+).
 
 ```sh
 cd desktop
-cargo build --release          # binary: target/release/orbit (orbit.exe on Windows)
+cargo build --release          # binary: target/release/airwand (airwand.exe on Windows)
 cargo test                     # protocol, crypto, keymap, filter and config tests
 RUST_LOG=debug cargo run       # run from source with verbose logs
 ```
@@ -28,42 +28,42 @@ development packages, and Linux is not a supported host anyway.
 ### macOS
 
 ```sh
-./scripts/bundle-macos.sh        # universal (arm64 + x86_64) dist/Orbit.app, ad-hoc signed
-./scripts/bundle-macos.sh --zip  # also dist/Orbit-macos.zip
-open dist/Orbit.app
+./scripts/bundle-macos.sh        # universal (arm64 + x86_64) dist/AirWand.app, ad-hoc signed
+./scripts/bundle-macos.sh --zip  # also dist/AirWand-macos.zip
+open dist/AirWand.app
 ```
 
 The bundle uses `macos/Info.plist`: `LSUIElement` (no Dock icon), bundle id
-`app.orbit.desktop`, `NSLocalNetworkUsageDescription` and `NSBonjourServices = [_orbit._tcp]`.
+`app.airwand.desktop`, `NSLocalNetworkUsageDescription` and `NSBonjourServices = [_orbit._tcp]`.
 
 ### Windows
 
 ```powershell
 cargo build --release
-.\target\release\orbit.exe
+.\target\release\airwand.exe
 ```
 
 Release builds use the GUI subsystem, so no console window opens. Logs go to
-`%APPDATA%\Orbit\orbit.log` instead.
+`%APPDATA%\AirWand\airwand.log` instead.
 
 ## Permissions
 
 ### macOS: Accessibility (required)
 
 macOS only lets apps post mouse and keyboard events after you grant Accessibility access. On
-first start Orbit calls `AXIsProcessTrustedWithOptions(prompt: true)`, which opens the
+first start AirWand calls `AXIsProcessTrustedWithOptions(prompt: true)`, which opens the
 system prompt. Go to **System Settings → Privacy & Security → Accessibility** and enable
-**Orbit**, or the `orbit` binary / your terminal if you run it from source. Until you do,
-the menu shows a ⚠ line and the log prints a warning. Orbit checks again every 5 s, but
-some macOS versions only honour the grant after you restart Orbit.
+**AirWand**, or the `airwand` binary / your terminal if you run it from source. Until you do,
+the menu shows a ⚠ line and the log prints a warning. AirWand checks again every 5 s, but
+some macOS versions only honour the grant after you restart AirWand.
 
 The ad-hoc signature changes on every rebuild, so macOS treats each new build as a different
-app. If input stops working after a rebuild, remove the old Orbit entry from the
+app. If input stops working after a rebuild, remove the old AirWand entry from the
 Accessibility list and add it again.
 
 ### macOS: Local Network
 
-macOS 15 and later ask "Allow Orbit to find devices on local networks?" the first time.
+macOS 15 and later ask "Allow AirWand to find devices on local networks?" the first time.
 Choose **Allow**. Without it, Bonjour and the UDP control channel are blocked. To change it
 later, use System Settings → Privacy & Security → Local Network.
 
@@ -71,13 +71,13 @@ later, use System Settings → Privacy & Security → Local Network.
 
 Phones must reach TCP and UDP 47821, plus UDP 5353 for mDNS. There are two options:
 
-* Accept the Windows Defender Firewall prompt the first time `orbit.exe` starts. Tick
+* Accept the Windows Defender Firewall prompt the first time `airwand.exe` starts. Tick
   **Private networks**.
 * Or, once, from an **elevated** PowerShell:
 
   ```powershell
   powershell -ExecutionPolicy Bypass -File .\scripts\firewall-windows.ps1
-  # options: -Profiles Private,Domain   -Program C:\path\to\orbit.exe   -Remove
+  # options: -Profiles Private,Domain   -Program C:\path\to\airwand.exe   -Remove
   ```
 
 Make sure your Wi-Fi network is set to **Private** (Settings → Network & internet → Wi-Fi →
@@ -87,11 +87,11 @@ your network).
 
 Windows blocks input injected by a normal process into windows of apps that run as
 administrator (UIPI), including Task Manager and installers. If you need to control those,
-run Orbit as administrator.
+run AirWand as administrator.
 
 ## Using it
 
-1. Start Orbit. The ring icon appears in the menu bar or notification area, with the status
+1. Start AirWand. The ring icon appears in the menu bar or notification area, with the status
    "Waiting for devices".
 2. In the phone app, tap this computer in the radar, or enter its IP address.
 3. Check that both screens show the same 6-digit code, then click **Allow**. On Windows,
@@ -105,14 +105,14 @@ Tray menu items:
 * **Pause control / Resume control**: while paused, input is ignored but PINGs are still
   answered.
 * **Paired devices**: the paired phones (● marks connected ones) and **Forget all**.
-* **Quit Orbit**: releases held input and stops advertising.
+* **Quit AirWand**: releases held input and stops advertising.
 
 ## Configuration
 
 The config is JSON at:
 
-* macOS: `~/Library/Application Support/Orbit/config.json` (directory `0700`, file `0600`)
-* Windows: `%APPDATA%\Orbit\config.json`
+* macOS: `~/Library/Application Support/AirWand/config.json` (directory `0700`, file `0600`)
+* Windows: `%APPDATA%\AirWand\config.json`
 
 ```json
 {
@@ -126,10 +126,10 @@ The config is JSON at:
 ```
 
 * `hostName` defaults to the macOS Computer Name (`scutil --get ComputerName`) or the
-  Windows host name. Edit it and restart Orbit to rename the computer.
+  Windows host name. Edit it and restart AirWand to rename the computer.
 * `invertScroll` flips both scroll axes. Use it only if scrolling runs backwards on your
   system.
-* Delete the file to reset Orbit. This creates a new host identity, so phones must pair
+* Delete the file to reset AirWand. This creates a new host identity, so phones must pair
   again.
 
 ## OS mappings
@@ -143,7 +143,7 @@ The config is JSON at:
 | 6 / 7 Back / forward | ⌘[ / ⌘] | Alt+← / → |
 | 8 / 9 Zoom in / out | ⌘= / ⌘- | Ctrl+= / Ctrl+- |
 
-Show desktop on macOS uses F11 because that is the system default hotkey. Orbit sends the
+Show desktop on macOS uses F11 because that is the system default hotkey. AirWand sends the
 F11 key code with the same Fn flag a real keyboard sets, so no Fn key is involved. ⌘F3 only
 works with the F3 key's Mission Control function, and ⌃↓ is App Exposé, not Show Desktop.
 If you remapped Show Desktop, set it back to F11 in System Settings → Keyboard → Keyboard
@@ -182,8 +182,8 @@ How each kind of input is injected:
 * **Pairing works but nothing moves.**
   * macOS: Accessibility permission (see above).
   * Windows: the target window may be elevated (UIPI).
-  * Check that Orbit isn't paused.
-* **"binding UDP port 47821 … is Orbit already running?"** Another instance, or another
+  * Check that AirWand isn't paused.
+* **"binding UDP port 47821 … is AirWand already running?"** Another instance, or another
   app, holds the port. Quit it first.
 * **The pairing dialog is hidden.** On macOS it can open behind full-screen apps; switch to
   it with ⌘⇥. On Windows it opens top-most. If you don't answer within 60 s, the phone gets
@@ -192,8 +192,8 @@ How each kind of input is injected:
   If your OS inverts it a second time, set `"invertScroll": true`.
 * **Logs**:
   * From source: `RUST_LOG=debug cargo run`.
-  * macOS app: `RUST_LOG=debug dist/Orbit.app/Contents/MacOS/orbit`.
-  * Windows release: `%APPDATA%\Orbit\orbit.log`.
+  * macOS app: `RUST_LOG=debug dist/AirWand.app/Contents/MacOS/airwand`.
+  * Windows release: `%APPDATA%\AirWand\airwand.log`.
 
 ## Code layout
 

@@ -22,7 +22,7 @@ fn instance_name(name: &str) -> String {
         out.push(c);
     }
     if out.trim().is_empty() {
-        "Orbit".to_string()
+        "AirWand".to_string()
     } else {
         out
     }
@@ -31,7 +31,7 @@ fn instance_name(name: &str) -> String {
 /// Our own `.local.` host label, derived from the hostId so it never collides with the
 /// operating system's own mDNS host name.
 fn mdns_host_name(host_id_hex: &str) -> String {
-    format!("orbit-{}.local.", &host_id_hex[..12])
+    format!("airwand-{}.local.", &host_id_hex[..12])
 }
 
 /// Registers the service; keep the returned daemon alive for as long as we advertise.
@@ -92,7 +92,7 @@ mod tests {
     fn instance_names_fit() {
         assert_eq!(instance_name("Lev's MacBook"), "Lev's MacBook");
         assert!(instance_name(&"Ж".repeat(100)).len() <= 63);
-        assert_eq!(instance_name("\n"), "Orbit");
-        assert_eq!(mdns_host_name(&"ab".repeat(16)), "orbit-abababababab.local.");
+        assert_eq!(instance_name("\n"), "AirWand");
+        assert_eq!(mdns_host_name(&"ab".repeat(16)), "airwand-abababababab.local.");
     }
 }

@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = OrbitScope.of(context);
+    final s = AirWandScope.of(context);
     return Scaffold(
       backgroundColor: P.bg,
       body: SafeArea(
@@ -32,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   const _Body({required this.s});
-  final OrbitServices s;
+  final AirWandServices s;
 
   static const List<(double, String)> _accel = <(double, String)>[
     (0.0, 'Off'),
@@ -62,7 +62,7 @@ class _Body extends StatelessWidget {
         SizedBox(
           height: 44,
           child: Row(children: <Widget>[
-            const Cap('Orbit · v1'),
+            const Cap('AirWand · v1'),
             const Spacer(),
             Pressable(
               onTap: () => Navigator.of(context).maybePop(),
@@ -443,7 +443,7 @@ class _EditableRowState extends State<_EditableRow> {
 
 class _HostRow extends StatefulWidget {
   const _HostRow({super.key, required this.s, required this.host});
-  final OrbitServices s;
+  final AirWandServices s;
   final PairedHost host;
 
   @override

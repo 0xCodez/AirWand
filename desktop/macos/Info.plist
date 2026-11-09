@@ -5,13 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Orbit</string>
+	<string>AirWand</string>
 	<key>CFBundleName</key>
-	<string>Orbit</string>
+	<string>AirWand</string>
 	<key>CFBundleExecutable</key>
-	<string>orbit</string>
+	<string>airwand</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>app.orbit.desktop</string>
+	<string>app.airwand.desktop</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -29,12 +31,12 @@
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Orbit listens on your local network so your phone can find this computer and control it as a trackpad, keyboard and remote.</string>
+	<string>AirWand listens on your local network so your phone can find this computer and control it as a trackpad, keyboard and remote.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_orbit._tcp</string>
 	</array>
 	<key>NSAccessibilityUsageDescription</key>
-	<string>Orbit needs Accessibility access to move the pointer, click, scroll and type on behalf of your paired phone.</string>
+	<string>AirWand needs Accessibility access to move the pointer, click, scroll and type on behalf of your paired phone.</string>
 </dict>
 </plist>

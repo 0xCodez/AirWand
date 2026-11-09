@@ -7,7 +7,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:orbit/ui/prism/prism.dart';
+import 'package:airwand/ui/prism/prism.dart';
 
 import '../../net/control.dart';
 import '../../net/hosts.dart';
@@ -92,7 +92,7 @@ class _HostSwitcher extends StatefulWidget {
 
 class _HostSwitcherState extends State<_HostSwitcher>
     with SingleTickerProviderStateMixin {
-  late final OrbitServices _s = OrbitScope.of(context);
+  late final AirWandServices _s = AirWandScope.of(context);
   late final Ticker _ticker;
   late final CurvedAnimation _open = CurvedAnimation(
     parent: widget.animation,

@@ -1,4 +1,4 @@
-// Orbit wire protocol v1 — see docs/PROTOCOL.md (the binding contract).
+// AirWand wire protocol v1 — see docs/PROTOCOL.md (the binding contract).
 //
 // Everything here is pure Dart (no Flutter imports) so it can be unit tested
 // and reused by any isolate.
@@ -453,7 +453,7 @@ class PairingSecrets {
 }
 
 /// `HKDF-SHA256(shared, salt = "orbit/v1", info = label || deviceId || hostId)`
-Future<Uint8List> hkdfOrbit({
+Future<Uint8List> hkdfAirWand({
   required List<int> sharedSecret,
   required String label,
   required List<int> deviceId,
@@ -475,14 +475,14 @@ Future<PairingSecrets> derivePairingSecrets({
   required List<int> deviceId,
   required List<int> hostId,
 }) async {
-  final key = await hkdfOrbit(
+  final key = await hkdfAirWand(
     sharedSecret: sharedSecret,
     label: 'key',
     deviceId: deviceId,
     hostId: hostId,
     length: 32,
   );
-  final codeBytes = await hkdfOrbit(
+  final codeBytes = await hkdfAirWand(
     sharedSecret: sharedSecret,
     label: 'code',
     deviceId: deviceId,

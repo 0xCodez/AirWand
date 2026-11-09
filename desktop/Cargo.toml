@@ -1,14 +1,15 @@
 [package]
-name = "orbit-desktop"
+name = "airwand-desktop"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.77"
-description = "Orbit host agent: turns a paired phone into a trackpad, air pointer, keyboard and media remote for macOS and Windows."
+description = "AirWand host agent: turns a paired phone into a trackpad, air pointer, keyboard and media remote for macOS and Windows."
 license = "MIT"
 publish = false
+build = "build.rs"
 
 [[bin]]
-name = "orbit"
+name = "airwand"
 path = "src/main.rs"
 
 [dependencies]
@@ -45,6 +46,10 @@ rfd = "0.14.1"
 # frontmost, so the NSAlert would otherwise open behind other windows). Already in the
 # dependency tree through rfd / tao.
 objc = "0.2.7"
+
+[target.'cfg(windows)'.build-dependencies]
+# Embeds windows/airwand.ico and version info into airwand.exe.
+winresource = "0.1.19"
 
 [target.'cfg(windows)'.dependencies]
 windows = { version = "0.58.0", features = [

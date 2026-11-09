@@ -1,6 +1,6 @@
 # Security Policy
 
-Orbit lets a phone move the mouse and type on a computer. A flaw here can mean someone else controlling your machine, so we take reports seriously.
+AirWand lets a phone move the mouse and type on a computer. A flaw here can mean someone else controlling your machine, so we take reports seriously.
 
 ## Reporting a vulnerability
 
@@ -21,7 +21,7 @@ We will credit you in the release notes unless you prefer otherwise. Please give
 
 ## Supported versions
 
-Orbit is pre-1.0. Only the latest release receives security fixes.
+AirWand is pre-1.0. Only the latest release receives security fixes.
 
 | Version | Supported |
 |---|---|
@@ -37,7 +37,7 @@ This summary follows the security notes in [docs/PROTOCOL.md](docs/PROTOCOL.md).
 - **Control of the computer:** pointer, keyboard and text injection, media keys.
 - **Pairing keys:** the 32-byte symmetric key shared by each phone / computer pair.
 
-### What Orbit defends against
+### What AirWand defends against
 
 | Threat | Defense |
 |---|---|
@@ -53,8 +53,8 @@ This summary follows the security notes in [docs/PROTOCOL.md](docs/PROTOCOL.md).
 
 - **Cross-session replay (v1 protocol).** An attacker on the LAN who recorded the encrypted packets of an earlier session can replay that recording after the device has started a newer session, because the host resets its sequence window when the session ID changes. The attacker cannot create new input or read anything, only repeat old input. Fix planned: a host-issued session challenge (protocol v2, see [docs/ROADMAP.md](docs/ROADMAP.md)).
 - **Key storage.** In v0.1 pairing keys are kept in app-private storage on the phone and in the user's configuration directory on the computer, not yet in the OS keychain (Keychain / Android Keystore / Windows DPAPI). Anyone who can read your user account's files can copy them. Moving keys to secure storage is on the roadmap.
-- **Metadata is visible on the LAN.** mDNS and broadcast replies reveal the computer's name, OS and that Orbit is installed. Packet timing and size are visible to anyone on the network, even though the content is not.
-- **Denial of service.** Anyone on the LAN can flood UDP port 47821 or the pairing port. Orbit drops invalid traffic cheaply, but it does not try to resist a determined local flood.
+- **Metadata is visible on the LAN.** mDNS and broadcast replies reveal the computer's name, OS and that AirWand is installed. Packet timing and size are visible to anyone on the network, even though the content is not.
+- **Denial of service.** Anyone on the LAN can flood UDP port 47821 or the pairing port. AirWand drops invalid traffic cheaply, but it does not try to resist a determined local flood.
 - **Release signing.** v0.1 macOS builds are ad-hoc signed (not notarized), Windows builds are unsigned, Android APKs use a debug key, and the iOS IPA is unsigned. Download builds only from this repository's Releases page and check the published checksums when available.
 
 ### Out of scope

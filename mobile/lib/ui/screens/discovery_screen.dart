@@ -9,7 +9,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:orbit/ui/prism/prism.dart';
+import 'package:airwand/ui/prism/prism.dart';
 
 import '../../net/discovery.dart';
 import '../../net/protocol.dart';
@@ -193,7 +193,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
   }
 
   Future<void> _pick(DiscoveredHost h) async {
-    final s = OrbitScope.of(context);
+    final s = AirWandScope.of(context);
     if (s.hosts.contains(h.id)) {
       Haptic.medium();
       await s.hosts.updateEndpoint(h.id, address: h.address, port: h.port);
@@ -247,7 +247,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
   @override
   Widget build(BuildContext context) {
     final hosts = _discovery.hosts;
-    final s = OrbitScope.of(context);
+    final s = AirWandScope.of(context);
     final q = _enter.value.clamp(0.0, 1.0);
     final status = hosts.isEmpty
         ? 'Looking for computers on Wi-Fi'
@@ -287,8 +287,8 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
                   const SizedBox(height: 6),
                   _cap(
                     _showTip && hosts.isEmpty
-                        ? 'Same Wi-Fi? Open Orbit on the computer, or enter its IP'
-                        : 'Install Orbit for Mac or Windows on the computer you want to control',
+                        ? 'Same Wi-Fi? Open AirWand on the computer, or enter its IP'
+                        : 'Install AirWand for Mac or Windows on the computer you want to control',
                     align: TextAlign.center,
                   ),
                 ],
@@ -383,7 +383,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
     });
   }
 
-  Widget _found(List<DiscoveredHost> hosts, OrbitServices s) {
+  Widget _found(List<DiscoveredHost> hosts, AirWandServices s) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: _manualOpen ? 150 : 230),
       child: Column(

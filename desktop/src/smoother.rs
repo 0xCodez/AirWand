@@ -231,7 +231,7 @@ impl Smoother {
     pub fn spawn(invert_scroll: bool) -> std::io::Result<Smoother> {
         let (tx, rx) = mpsc::channel();
         let handle = std::thread::Builder::new()
-            .name("orbit-motion".into())
+            .name("airwand-motion".into())
             .spawn(move || run(rx, Injector::new(invert_scroll)))?;
         Ok(Smoother { tx, handle: Some(handle) })
     }

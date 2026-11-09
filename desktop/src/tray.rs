@@ -67,7 +67,7 @@ impl Tray {
 }
 
 fn tooltip(app: &App) -> String {
-    format!("Orbit — {}", app.status_line())
+    format!("AirWand — {}", app.status_line())
 }
 
 fn build_menu(app: &App) -> Result<(Menu, MenuIds)> {
@@ -78,7 +78,7 @@ fn build_menu(app: &App) -> Result<(Menu, MenuIds)> {
     let host = MenuItem::new(format!("This computer: {}", app.host_name()), false, None);
     menu.append(&host)?;
     if !app.input_permitted.load(Ordering::Relaxed) {
-        let warn = MenuItem::new("⚠ Allow Orbit in Settings → Privacy & Security → Accessibility", false, None);
+        let warn = MenuItem::new("⚠ Allow AirWand in Settings → Privacy & Security → Accessibility", false, None);
         menu.append(&warn)?;
     }
     menu.append(&PredefinedMenuItem::separator())?;
@@ -91,7 +91,7 @@ fn build_menu(app: &App) -> Result<(Menu, MenuIds)> {
     let paired = app.paired_devices();
     let connected = app.connected_names();
     if paired.is_empty() {
-        devices.append(&MenuItem::new("No paired devices — open Orbit on your phone", false, None))?;
+        devices.append(&MenuItem::new("No paired devices — open AirWand on your phone", false, None))?;
     } else {
         for d in &paired {
             let dot = if connected.contains(&d.name) { "● " } else { "○ " };
@@ -109,48 +109,63 @@ fn build_menu(app: &App) -> Result<(Menu, MenuIds)> {
     menu.append(&devices)?;
 
     menu.append(&PredefinedMenuItem::separator())?;
-    let quit = MenuItem::new("Quit Orbit", true, None);
+    let quit = MenuItem::new("Quit AirWand", true, None);
     menu.append(&quit)?;
 
     let ids = MenuIds { pause: pause.id().clone(), forget_all: forget_all.id().clone(), quit: quit.id().clone() };
     Ok((menu, ids))
 }
 
-/// Draws the Orbit mark (a ring with a small satellite) into an RGBA buffer, so the app
-/// ships no binary assets. macOS: black + alpha, used as a template image (the menu bar
-/// tints it). Windows: the orbit-blue → violet accent gradient.
+/// Draws the AirWand mark (a diagonal wand with a four-point sparkle at its tip) into an
+/// RGBA buffer, so the tray needs no image decoder. macOS: black + alpha, used as a
+/// template image (the menu bar tints it). Windows: the Prism spectrum, cobalt → violet
+/// wand with a cyan sparkle, readable on both light and dark taskbars.
 fn draw_icon(size: u32) -> Vec<u8> {
+    const SS: u32 = 4; // supersampling per axis
     let s = size as f64;
-    let c = s / 2.0;
-    let ring_r = s * 0.34;
-    let ring_half = s * 0.075;
-    let angle = -std::f64::consts::FRAC_PI_4; // satellite at the upper right
-    let (sx, sy) = (c + ring_r * angle.cos(), c + ring_r * angle.sin());
-    let sat_r = s * 0.13;
-    let gap_r = sat_r + s * 0.06; // clear ring around the satellite
+    let (ax, ay, bx, by) = (0.14 * s, 0.86 * s, 0.50 * s, 0.50 * s);
+    let half_w = 0.06 * s;
+    let (cx, cy) = (0.68 * s, 0.32 * s);
+    let star_r = (0.32 * s).sqrt();
+    let gap_r = 0.19 * s;
+
+    let wand_dist = |x: f64, y: f64| {
+        let (dx, dy) = (bx - ax, by - ay);
+        let t = (((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy)).clamp(0.0, 1.0);
+        ((x - ax - t * dx).powi(2) + (y - ay - t * dy).powi(2)).sqrt()
+    };
 
     let mut px = vec![0u8; (size * size * 4) as usize];
     for y in 0..size {
         for x in 0..size {
-            let (fx, fy) = (x as f64 + 0.5, y as f64 + 0.5);
-            let d = ((fx - c).powi(2) + (fy - c).powi(2)).sqrt();
-            let ds = ((fx - sx).powi(2) + (fy - sy).powi(2)).sqrt();
-            let ring = (ring_half - (d - ring_r).abs() + 0.5).clamp(0.0, 1.0);
-            let gap = (ds - gap_r + 0.5).clamp(0.0, 1.0);
-            let sat = (sat_r - ds + 0.5).clamp(0.0, 1.0);
-            let alpha = (ring * gap).max(sat);
+            let (mut wand, mut star) = (0u32, 0u32);
+            for sy in 0..SS {
+                for sx in 0..SS {
+                    let fx = x as f64 + (sx as f64 + 0.5) / SS as f64;
+                    let fy = y as f64 + (sy as f64 + 0.5) / SS as f64;
+                    let (dx, dy) = ((fx - cx).abs(), (fy - cy).abs());
+                    // sqrt|x| + sqrt|y| <= sqrt r: a concave four-point sparkle.
+                    if dx.sqrt() + dy.sqrt() <= star_r {
+                        star += 1;
+                    } else if wand_dist(fx, fy) <= half_w && (dx * dx + dy * dy).sqrt() > gap_r {
+                        wand += 1;
+                    }
+                }
+            }
+            let n = (SS * SS) as f64;
+            let alpha = (wand + star) as f64 / n;
             if alpha <= 0.0 {
                 continue;
             }
             let i = ((y * size + x) * 4) as usize;
             let (r, g, b) = if cfg!(target_os = "macos") {
                 (0.0, 0.0, 0.0)
-            } else if sat > 0.0 {
-                (143.0, 219.0, 255.0) // flare #8FDBFF
+            } else if star >= wand {
+                (38.0, 200.0, 255.0) // #26C8FF
             } else {
-                // accentA #5B8CFF → accentB #A06BFF along the 135° diagonal
-                let t = ((fx + fy) / (2.0 * s)).clamp(0.0, 1.0);
-                (91.0 + (160.0 - 91.0) * t, 140.0 + (107.0 - 140.0) * t, 255.0)
+                // #2E5CFF → #9646FF from the handle to the tip
+                let t = (x as f64 / s).clamp(0.0, 1.0);
+                (46.0 + (150.0 - 46.0) * t, 92.0 + (70.0 - 92.0) * t, 255.0)
             };
             px[i] = r as u8;
             px[i + 1] = g as u8;
@@ -171,14 +186,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn icon_has_ring_and_transparent_center() {
+    fn icon_has_wand_and_sparkle() {
         let size = 32;
         let px = draw_icon(size);
         assert_eq!(px.len(), (size * size * 4) as usize);
         let alpha = |x: u32, y: u32| px[((y * size + x) * 4 + 3) as usize];
-        assert_eq!(alpha(16, 16), 0, "center is empty");
-        assert_eq!(alpha(0, 0), 0, "corner is empty");
-        // Left side of the ring (radius 0.34 * 32 ≈ 10.9 px from the center).
-        assert!(alpha(5, 16) > 200, "ring is opaque");
+        assert_eq!(alpha(0, 0), 0, "top-left corner is empty");
+        assert_eq!(alpha(31, 31), 0, "bottom-right corner is empty");
+        assert_eq!(alpha(6, 6), 0, "area above the wand is empty");
+        assert!(alpha(22, 10) > 200, "sparkle center is opaque");
+        assert!(alpha(10, 22) > 200, "wand shaft is opaque");
     }
 }

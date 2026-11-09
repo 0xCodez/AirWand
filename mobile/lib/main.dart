@@ -14,24 +14,24 @@ Future<void> main() async {
   ]);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   final prefs = await SharedPreferences.getInstance();
-  final services = await OrbitServices.create(prefs);
+  final services = await AirWandServices.create(prefs);
   Haptic.bind(services.settings);
-  runApp(OrbitApp(services: services));
+  runApp(AirWandApp(services: services));
 }
 
-class OrbitApp extends StatelessWidget {
-  const OrbitApp({super.key, required this.services});
+class AirWandApp extends StatelessWidget {
+  const AirWandApp({super.key, required this.services});
 
-  final OrbitServices services;
+  final AirWandServices services;
 
   @override
   Widget build(BuildContext context) {
-    return OrbitScope(
+    return AirWandScope(
       services: services,
       child: ListenableBuilder(
         listenable: services.settings,
         builder: (context, _) => MaterialApp(
-          title: 'Orbit',
+          title: 'AirWand',
           debugShowCheckedModeBanner: false,
           theme: PrismTheme.light(),
           darkTheme: PrismTheme.dark(),
@@ -60,7 +60,7 @@ class RootGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hosts = OrbitScope.of(context).hosts;
+    final hosts = AirWandScope.of(context).hosts;
     return ListenableBuilder(
       listenable: hosts,
       builder: (context, _) => AnimatedSwitcher(
