@@ -20,7 +20,7 @@ dependencies:
   # Paired hosts + settings (v1). v2: move keys to flutter_secure_storage.
   shared_preferences: ^2.2.3
   # Prism type: Instrument Sans (UI) + Martian Mono (tiny caps).
-  google_fonts: ^6.2.1
+  google_fonts: ^9.0.0
 
 dev_dependencies:
   flutter_test:
