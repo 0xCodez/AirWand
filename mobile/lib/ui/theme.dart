@@ -1,5 +1,6 @@
 // Material theme that forwards to the Prism design system.
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/services.dart';
 
 import 'prism/prism.dart';
